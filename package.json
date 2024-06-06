@@ -5,7 +5,7 @@
     "create-parcel-app": "./dist/index.js"
   },
   "scripts": {
-    "dev": "npx tsc && node dist/index.js",
+    "dev": "npx tsc",
     "build": "tsc && uglifyjs --compress --mangle --output dist/index.js -- dist/_draft.js"
   },
   "devDependencies": {

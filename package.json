@@ -1,18 +1,20 @@
 {
   "name": "parcel-web-app",
-  "main": "index.js",
+  "version": "1.0.0",
+  "displayName": "Parcel Web App",
+  "description": "Standard template for developing web interfaces with Parcel.",
+  "main": "./dist/index.js",
   "bin": {
-    "create-parcel-app": "./dist/index.js"
+    "@ducho/debug": "./dist/index.js"
   },
   "scripts": {
-    "dev": "npx tsc",
-    "build": "tsc && uglifyjs --compress --mangle --output dist/index.js -- dist/_draft.js"
+    "dev": "ncc build ./src/index.ts -w -o dist/",
+    "build": "ncc build ./src/index.ts -o ./dist/ --minify --no-cache --no-source-map-register"
   },
   "devDependencies": {
-    "typescript": "^5.4.5",
-    "uglify-js": "^3.17.4"
-  },
-  "dependencies": {
-    "commander": "^12.1.0"
+    "@types/node": "^20.14.2",
+    "@vercel/ncc": "^0.38.1",
+    "commander": "^12.1.0",
+    "typescript": "^5.4.5"
   }
 }

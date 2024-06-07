@@ -1,10 +1,14 @@
+#! /usr/bin/env node
+
 import { program } from 'commander';
 import intro from './intro';
 import log from './log';
 import fs from 'fs';
-import pkg, { GitHubTreeUrl } from './env';
+import pkg from '../package.json'
 
 //intro()
+
+const GitHubTreeUrl = 'https://api.github.com/repos/27hohuuduc/ParcelTemplate/git/trees/main?recursive=2'
 
 program
   .name(pkg.displayName)

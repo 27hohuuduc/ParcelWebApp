@@ -5,7 +5,7 @@
   "description": "Standard template for developing web interfaces with Parcel.",
   "main": "./dist/index.js",
   "bin": {
-    "@ducho/debug": "./dist/index.js"
+    "create": "./dist/index.js"
   },
   "scripts": {
     "dev": "ncc build ./src/index.ts -w -o dist/",

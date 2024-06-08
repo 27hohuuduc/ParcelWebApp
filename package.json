@@ -1,14 +1,18 @@
 {
   "name": "parcel-template",
   "version": "1.0.0",
-  "repository": "github.com/27hohuuduc/ParcelTemplate",
+  "repository": "https://github.com/27hohuuduc/ParcelWebApp/tree/default",
   "description": "Standard template for developing web interfaces with Parcel.",
   "license": "Apache-2.0",
   "author": "DucHo <contact@hohuuduc.com>",
   "bugs": {
     "email": "help@hohuuduc.com",
-    "url": "https://github.com/27hohuuduc/ParcelTemplate/issues"
+    "url": "https://github.com/27hohuuduc/ParcelWebApp/issues"
   },
+  "keywords": [
+    "template",
+    "parcel"
+  ],
   "source": "src/index.html",
   "scripts": {
     "start": "parcel",
@@ -17,9 +21,5 @@
   "devDependencies": {
     "parcel": "^2.12.0",
     "parcel-bundler": "^1.6.1"
-  },
-  "keywords": [
-    "template",
-    "parcel"
-  ]
+  }
 }

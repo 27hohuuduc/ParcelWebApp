@@ -1,35 +1,57 @@
 #! /usr/bin/env node
 
-import { program } from 'commander';
 import intro from './intro';
-import log from './log';
-import fs from 'fs';
-import pkg from '../package.json'
+import ShowCommander from './commander';
+import { PromptObject } from 'prompts';
+import ShowPrompt, { ESLINT_QUESTION, LANGUAGE_QUESTION, NAME_QUESTION } from './prompts';
+import clone, { DEFAULT, VANILLA } from './source';
+import { log } from 'console';
+import { basename } from 'path';
+import { format } from './name';
 
-//intro()
+intro()
 
-const GitHubTreeUrl = 'https://api.github.com/repos/27hohuuduc/ParcelTemplate/git/trees/main?recursive=2'
+let pattern: 'ts' | 'js' = 'ts'
+let eslint: boolean = true
+const questions: PromptObject[] = []
+const commander = ShowCommander()
 
-program
-  .name(pkg.displayName)
-  .description(pkg.description)
-  .version(pkg.version)
-  .option('-ts, --typescript', 'Apply TypeScript pattern. (default is Javascript)', false)
-  .option('-e, --eslint', 'Apply ESLint configuration. (default no)', false)
-  .option('-f, --full-source', 'In Developing', false);
+if (commander['typescript'])
+    pattern = 'ts'
+else if (commander['javascript'])
+    pattern = 'js'
+else
+    questions.push(LANGUAGE_QUESTION)
 
-program.parse()
+if (commander['eslint'])
+    eslint = true
+else
+    questions.push(ESLINT_QUESTION)
 
-const opts = program.opts()
+// Recommend package name
+const packageName = NAME_QUESTION
+packageName.initial = format(basename(process.cwd()))
+questions.push(packageName)
 
-async () => {
-    const result = await fetch(GitHubTreeUrl).then(res => res.text())
-    console.log(result)
-  }
-
-
-// try {
-//   fs.cpSync(__dirname + "/template", process.cwd(), { recursive: true })
-// } catch (error) {
-//   log("Unable to initialize resource")
-// }
+ShowPrompt(questions)
+    .then(async value => {
+        if (!value.name) {
+            log("Something is wrong, please try again.")
+        }
+        if (value.language)
+            pattern = value.language
+        if (value.esline)
+            eslint = value.esline
+        let action: () => Promise<void>
+        switch (pattern) {
+            case 'ts':
+                action = clone.bind(this, DEFAULT, value.name)
+                break
+            case 'js':
+                action = clone.bind(this, VANILLA, value.name)
+        }
+        log("Wait a few minutes...")
+        action().then(() => {
+            log("We're done, enjoy!")
+        })
+    })

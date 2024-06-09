@@ -1,20 +1,37 @@
 {
-  "name": "parcel-web-app",
-  "version": "1.0.0",
+  "name": "create-parcel-webapp",
+  "version": "1.0.1",
   "displayName": "Parcel Web App",
+  "repository": "https://github.com/27hohuuduc/ParcelWebApp/tree/cli",
   "description": "Standard template for developing web interfaces with Parcel.",
-  "main": "./dist/index.js",
-  "bin": {
-    "create": "./dist/index.js"
+  "license": "Apache-2.0",
+  "author": "DucHo <contact@hohuuduc.com>",
+  "bugs": {
+    "email": "help@hohuuduc.com",
+    "url": "https://github.com/27hohuuduc/ParcelWebApp/issues"
   },
+  "keywords": [
+    "template",
+    "parcel"
+  ],
+  "bin": {
+    "create-parcel-webapp": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "ncc build ./src/index.ts -w -o dist/",
     "build": "ncc build ./src/index.ts -o ./dist/ --minify --no-cache --no-source-map-register"
   },
   "devDependencies": {
+    "@types/adm-zip": "^0.5.5",
     "@types/node": "^20.14.2",
+    "@types/prompts": "^2.4.9",
     "@vercel/ncc": "^0.38.1",
+    "adm-zip": "^0.5.14",
     "commander": "^12.1.0",
+    "prompts": "^2.4.2",
     "typescript": "^5.4.5"
   }
 }

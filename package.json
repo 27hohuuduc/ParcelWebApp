@@ -1,0 +1,13 @@
+{
+  "name": "parcel-template",
+  "version": "1.0.0",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build --dist-dir out --no-source-maps"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "parcel-bundler": "^1.6.1"
+  }
+}

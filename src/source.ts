@@ -1,12 +1,27 @@
-import AdmZip from "adm-zip"
+import AdmZip from 'adm-zip'
 import fs from 'fs'
-import { basename } from "path"
+import { basename } from 'path'
+import { HttpsProxyAgent } from 'https-proxy-agent'
+import fetch, { RequestInit, Response } from 'node-fetch'
+
+declare global {
+    namespace NodeJS {
+        interface ProcessEnv {
+            NODE_TLS_REJECT_UNAUTHORIZED: number;
+        }
+    }
+}
 
 export const DEFAULT = 'https://github.com/27hohuuduc/ParcelWebApp/archive/refs/heads/default.zip'
 export const VANILLA = 'https://github.com/27hohuuduc/ParcelWebApp/archive/refs/heads/vanilla.zip'
 
-export default async function clone(url: string = DEFAULT, packageName: string) {
-    return await fetch(url)
+export default async function clone(url: string = DEFAULT, packageName: string, proxy?: string) {
+    let init: RequestInit | undefined
+    if (proxy) {
+        process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
+        init = { agent: new HttpsProxyAgent(proxy) }
+    }
+    return await fetch(url, init)
         .then((res: Response) => res.arrayBuffer())
         .then(arrBuffer => {
             const zip = new AdmZip(toBuffer(arrBuffer))

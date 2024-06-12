@@ -37,6 +37,7 @@ ShowPrompt(questions)
     .then(async value => {
         if (!value.name) {
             log("Something is wrong, please try again.")
+            return
         }
         if (value.language)
             pattern = value.language
@@ -45,10 +46,10 @@ ShowPrompt(questions)
         let action: () => Promise<void>
         switch (pattern) {
             case 'ts':
-                action = clone.bind(this, DEFAULT, value.name)
+                action = clone.bind(this, DEFAULT, value.name, commander['proxy'])
                 break
             case 'js':
-                action = clone.bind(this, VANILLA, value.name)
+                action = clone.bind(this, VANILLA, value.name, commander['proxy'])
         }
         log("Wait a few minutes...")
         action().then(() => {

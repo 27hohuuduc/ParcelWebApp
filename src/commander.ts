@@ -9,6 +9,7 @@ export default function ShowCommander(): OptionValues {
         .option('-ts, --typescript', 'Apply Typescript pattern.', false)
         .option('-js, --javascript', 'Apply Javascript pattern.', false)
         .option('-e, --eslint', 'Apply ESLint configuration. (default no)', false)
+        .option('-p, --proxy <string>', 'Prpxy host', '')
 
     program.parse()
 

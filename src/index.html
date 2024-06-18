@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerSub</title>
+    <link href="styles.scss" rel="stylesheet" />
+</head>
+
+<body>
+    <script src="script.ts" type="module"></script>
+    <div id="main-container" data-state="none">
+        <div id="video-container" class="video-container" data-playing="false">
+            <video id="video-player">
+                Trình duyệt của bạn không hỗ trợ HTML5 video.
+            </video>
+            <div id="overlay" data-state="none">
+                <div id="play-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="32" fill="#222" />
+                        <polygon points="24,16 24,48 48,32" fill="#ffffff" />
+                    </svg>
+                </div>
+                <div id="controls" data-actived="true">
+                    <div id="progress-container">
+                        <div class="progress-background">
+                            <div id="progress"></div>
+                        </div>
+                    </div>
+                    <div id="bottom-container">
+                        <div id="time-display">
+                            <span class="current">
+                                00:00:00
+                            </span>
+                            <span>/</span>
+                            <span class="duration">
+                                00:00:00
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="subtitles" class="subtitles"></div>
+        </div>
+    </div>
+    <div>
+        <span>Deplay time</span>
+        <input id="deplay" type="number">
+    </div>
+    <div id="drop_zone">
+        Kéo và thả file vào đây hoặc nhấn vào để chọn file.
+        <input type="file" id="input-file" accept="video/*" style="display:none">
+    </div>
+</body>
+
+</html>

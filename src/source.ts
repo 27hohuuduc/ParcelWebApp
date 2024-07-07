@@ -16,7 +16,6 @@ export const DEFAULT = 'https://github.com/27hohuuduc/ParcelWebApp/archive/refs/
 export const VANILLA = 'https://github.com/27hohuuduc/ParcelWebApp/archive/refs/heads/vanilla.zip'
 
 export default async function clone(url: string = DEFAULT, packageName: string, eslint: boolean, proxy?: string) {
-    console.log(eslint)
     let init: RequestInit | undefined
     if (proxy) {
         process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0

@@ -1,6 +1,6 @@
 {
   "name": "create-parcel-web",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "displayName": "Parcel Web App",
   "repository": "https://github.com/27hohuuduc/ParcelWebApp/tree/cli",
   "description": "Standard template for developing web interfaces with Parcel.",

@@ -15,7 +15,8 @@ declare global {
 export const DEFAULT = 'https://github.com/27hohuuduc/ParcelWebApp/archive/refs/heads/default.zip'
 export const VANILLA = 'https://github.com/27hohuuduc/ParcelWebApp/archive/refs/heads/vanilla.zip'
 
-export default async function clone(url: string = DEFAULT, packageName: string, proxy?: string) {
+export default async function clone(url: string = DEFAULT, packageName: string, eslint: boolean, proxy?: string) {
+    console.log(eslint)
     let init: RequestInit | undefined
     if (proxy) {
         process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
@@ -37,15 +38,30 @@ export default async function clone(url: string = DEFAULT, packageName: string, 
                         fs.mkdirSync(executePath)
                 }
                 else {
-                    const buffer = entry.getData();
-                    if (basename(entry.entryName) === 'package.json') {
-                        const pkg = JSON.parse(buffer.toString("utf-8"))
-                        pkg.name = packageName
-                        fs.writeFileSync(executePath, JSON.stringify(pkg, null, 2))
-                        continue
+                    const buffer = entry.getData()
+                    switch (basename(entry.entryName)) {
+                        case 'package.json':
+                        case 'package.eslint.json':
+                            const pkg = JSON.parse(buffer.toString("utf-8"))
+                            pkg.name = packageName
+                            fs.writeFileSync(executePath, JSON.stringify(pkg, null, 2))
+                            continue
                     }
                     fs.writeFileSync(executePath, buffer.toString("utf-8"))
                 }
+            }
+            if (eslint) {
+                if (fs.existsSync(`${path}/package.json`))
+                    fs.unlinkSync(`${path}/package.json`)
+                if (fs.existsSync(`${path}/package.eslint.json`))
+                    fs.renameSync(`${path}/package.eslint.json`, `${path}/package.json`)
+
+            }
+            else {
+                if (fs.existsSync(`${path}/eslint.config.js`))
+                    fs.unlinkSync(`${path}/eslint.config.js`)
+                if (fs.existsSync(`${path}/package.eslint.json`))
+                    fs.unlinkSync(`${path}/package.eslint.json`)
             }
         })
 }
@@ -58,62 +74,3 @@ function toBuffer(arrBuffer: ArrayBuffer) {
     }
     return buffer;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const axios = require("axios");
-// const AdmZip = require('adm-zip');
-
-// async function get(url) {
-//     const options =  {
-//         method: 'GET',
-//         url: url,
-//         responseType: "arraybuffer"
-//     };
-//     const { data } = await axios(options);
-//     return data;
-// }
-
-// async function getAndUnZip(url) {
-//     const zipFileBuffer = await get(url);
-//     const zip = new AdmZip(zipFileBuffer);
-//     const entries = zip.getEntries();
-//     for(let entry of entries) {
-//         const buffer = entry.getData();
-//         console.log("File: " + entry.entryName + ", length (bytes): " + buffer.length + ", contents: " + buffer.toString("utf-8"));
-//     }
-// }
-
-// getAndUnZip('https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-zip-file.zip');

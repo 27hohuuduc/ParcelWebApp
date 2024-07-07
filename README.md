@@ -5,4 +5,4 @@ Easily set up a web development project with Parcel.
 
 ## Usage
 
-Type `npx create-parcel-webapp@latest`
+Type `npx create-parcel-web@latest`

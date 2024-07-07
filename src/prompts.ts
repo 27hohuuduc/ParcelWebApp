@@ -13,9 +13,9 @@ export const LANGUAGE_QUESTION: PromptObject = {
 }
 
 export const ESLINT_QUESTION: PromptObject = {
-    type: 'confirm',
+    type: prev => prev === 'ts' ? 'confirm' : null,
     name: 'eslint',
-    message: 'Would you like to apply ESLint? (in developing)',
+    message: 'Would you like to apply ESLint?',
     initial: true
 }
 
@@ -28,7 +28,7 @@ export const NAME_QUESTION: PromptObject = {
 
 interface IResult {
     language: 'ts' | 'js',
-    esline: boolean,
+    eslint: boolean,
     name: string
 }
 

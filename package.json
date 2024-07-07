@@ -1,6 +1,6 @@
 {
-  "name": "create-parcel-webapp",
-  "version": "1.1.0",
+  "name": "create-parcel-web",
+  "version": "1.2.0",
   "displayName": "Parcel Web App",
   "repository": "https://github.com/27hohuuduc/ParcelWebApp/tree/cli",
   "description": "Standard template for developing web interfaces with Parcel.",
@@ -15,7 +15,7 @@
     "parcel"
   ],
   "bin": {
-    "create-parcel-webapp": "dist/index.js"
+    "create-parcel-web": "dist/index.js"
   },
   "files": [
     "dist"

@@ -12,7 +12,7 @@ import { format } from './name';
 intro()
 
 let pattern: 'ts' | 'js' = 'ts'
-let eslint: boolean = true
+let eslint: boolean = false
 const questions: PromptObject[] = []
 const commander = ShowCommander()
 
@@ -41,15 +41,16 @@ ShowPrompt(questions)
         }
         if (value.language)
             pattern = value.language
-        if (value.esline)
-            eslint = value.esline
+        if (value.eslint) {
+            eslint = value.eslint
+        }
         let action: () => Promise<void>
         switch (pattern) {
             case 'ts':
-                action = clone.bind(this, DEFAULT, value.name, commander['proxy'])
+                action = clone.bind(this, DEFAULT, value.name, eslint, commander['proxy'])
                 break
             case 'js':
-                action = clone.bind(this, VANILLA, value.name, commander['proxy'])
+                action = clone.bind(this, VANILLA, value.name, eslint, commander['proxy'])
         }
         log("Wait a few minutes...")
         action().then(() => {
